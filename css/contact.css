@@ -1,0 +1,728 @@
+@charset "utf-8";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  font-family: "Hina Mincho", serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Hina Mincho", serif;
+}
+
+/* -------------------- */
+
+.wrapper {
+  max-width: 100vw;
+  max-height: 100vh;
+  width: 100%;
+  height: auto;
+}
+
+/* ヘッダー */
+
+#header {
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 35px;
+  padding-bottom: 10px;
+  position: sticky;
+  background-color: #fff;
+  /*固定する*/
+  position: -webkit-sticky;
+  /*Safari用ベンダープレフィックス*/
+  top: 0;
+  /* background-color: #F7F4D8; */
+
+  /* margin-left: 15%; */
+  /* padding: 5%; */
+}
+
+.h-logo {
+  padding-right: 50px;
+}
+
+.holizon-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.holizon-nav li {
+  max-width: 100%;
+  text-decoration: none;
+  list-style-type: none;
+  font-family: "Hina Mincho", serif;
+  letter-spacing: 0.5vmin;
+  font-size: 1.4vmin;
+  /* padding-right: 10%; */
+  white-space: nowrap;
+  /* align-items: center; */
+}
+
+.holizon-nav a {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: #333;
+}
+
+.holizon-nav a::after {
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 1.3px;
+  background: #cf755a;
+  transform: scale(0, 1);
+  transform-origin: center top;
+  transition: transform 0.3s;
+}
+
+.holizon-nav a:hover::after {
+  transform: scale(1, 1);
+}
+
+.hamburger {
+  visibility: hidden;
+}
+
+.globalMenuSp {
+  display: none;
+}
+
+@media (max-width: 1280px) {
+  .holizon {
+    display: none;
+  }
+
+  .hamburger {
+    visibility: visible;
+  }
+
+  .globalMenuSp {
+    display: block;
+  }
+
+  .h-logo {
+    padding-right: 0;
+    text-align: center;
+  }
+
+  .h-logo img {
+    width: 55%;
+  }
+
+  /* ハンバーガーメニュー */
+
+  /*　ハンバーガーボタン */
+  .hamburger {
+    display: block;
+    position: fixed;
+    z-index: 3;
+    /* right : 32px; */
+    top: 32px;
+    left: 20px;
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .hamburger span {
+    display: block;
+    position: absolute;
+    width: 30px;
+    height: 2px;
+    left: 6px;
+    background: #555;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    transition: 0.5s all;
+  }
+
+  .hamburger span:nth-child(1) {
+    top: 10px;
+  }
+
+  .hamburger span:nth-child(2) {
+    top: 20px;
+  }
+
+  .hamburger span:nth-child(3) {
+    top: 30px;
+  }
+
+  /* ナビ開いてる時のボタン */
+
+  .hamburger.active span:nth-child(1) {
+    top: 16px;
+    left: 6px;
+    width: 24px;
+    background: #555;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    left: 60%;
+    opacity: 0;
+    -webkit-animation: active-btn17-bar02 0.8s forwards;
+    animation: active-hamburger-bar02 0.8s forwards;
+  }
+
+  @-webkit-keyframes active-hamburger-bar02 {
+    100% {
+      height: 0;
+    }
+  }
+
+  @keyframes active-hamburger-bar02 {
+    100% {
+      height: 0;
+    }
+  }
+
+  .hamburger.active span:nth-child(3) {
+    top: 16px;
+    width: 24px;
+    background: #555;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  .hamburger::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    content: "";
+    width: 52px;
+    height: 52px;
+    margin: -30px 0 0 -30px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0);
+    transition: all 0.75s;
+  }
+
+  .hamburger.active::after {
+    border: 2px solid #555;
+  }
+
+  nav.globalMenuSp {
+    position: fixed;
+    z-index: 2;
+    top: 80px;
+    left: 0;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+    visibility: hidden;
+  }
+
+  nav.globalMenuSp ul {
+    /* margin-top: 50px;
+  margin-bottom: 40px; */
+    padding: 0;
+    width: 100%;
+  }
+
+  nav.globalMenuSp ul li {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 25px;
+    margin-left: 10px;
+    padding-bottom: 15px;
+    width: 100%;
+    transition: 0.4s all;
+  }
+
+  nav.globalMenuSp ul li:last-child {
+    padding-bottom: 20px;
+  }
+
+  nav.globalMenuSp ul li:hover {
+    /* background :#ddd; */
+    border-right: solid 1px #fff;
+    width: 70%;
+  }
+
+  nav.globalMenuSp ul li a {
+    display: block;
+    color: #fff;
+    padding: 1em 0;
+    text-decoration: none;
+    letter-spacing: 6px;
+    font-family: "Hina Mincho", serif;
+  }
+
+  /* このクラスを、jQueryで付与・削除する */
+  nav.globalMenuSp.active {
+    opacity: 100;
+    visibility: visible;
+  }
+}
+
+.contents-wrapper {
+  width: 100%;
+  /* display: flex; */
+  padding: 3%;
+  position: relative;
+}
+.contents-wrapper img {
+  width: 100%;
+}
+
+form {
+  width: 42%;
+  height: 100%;
+  position: absolute;
+  top: 1%;
+  left: 3%;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+h1 {
+  width: 100%;
+  font-size: 2vw;
+  letter-spacing: 0.8vw;
+  font-weight: 400;
+}
+.address {
+  width: 100%;
+  height: 5%;
+  display: flex;
+  margin-top: 10%;
+}
+
+.map {
+  width: 3%;
+  height: 100%;
+}
+
+.map img {
+  width: 100%;
+  display: block;
+}
+
+.address p {
+  width: 80%;
+  height: 78%;
+  margin-left: 3%;
+  font-size: 1vw;
+  letter-spacing: 0.4vw;
+}
+
+.mail {
+  width: 100%;
+  height: 5%;
+  display: flex;
+  margin-top: 3%;
+}
+
+.emoji {
+  width: 3.5%;
+  height: 100%;
+}
+
+.emoji img {
+  width: 100%;
+}
+
+.mail p {
+  width: 80%;
+  height: 78%;
+  margin-left: 3%;
+  font-size: 1.2vw;
+  letter-spacing: 0.4vw;
+}
+
+.col-50 {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 8%;
+  margin-bottom: 3%;
+}
+.name,
+.e-mail {
+  width: 100%;
+  /* height: 100%; */
+  margin-right: 5%;
+}
+
+input[type="text"],
+textarea {
+  width: 100%; /* Full width */
+  padding: 10%; /* Some padding */
+  padding-top: 5%;
+  padding-left: 5%;
+  background-color: #cecfce;
+  border-radius: 6px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  resize: vertical;
+  font-family: "Hina Mincho", serif;
+  font-size: 1vw;
+}
+
+textarea {
+  width: 100%;
+  height: 30%;
+  /* margin-top: 8%; */
+}
+.submit {
+  width: 100%;
+  text-align: center;
+}
+
+input[type="submit"] {
+  background-color: #cf755a;
+  color: white;
+  padding: 4% 13%;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1vw;
+  margin-top: 2%;
+  font-family: "Hina Mincho", serif;
+}
+
+input[type="submit"]:hover {
+  background-color: #af654e;
+}
+
+.bg {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .contents-wrapper {
+    position: unset;
+  }
+  .contents-wrapper img {
+    display: none;
+  }
+
+  h1 {
+    width: 100%;
+    font-size: 2.5vw;
+    letter-spacing: 0.8vw;
+    font-weight: 400;
+    text-align: center;
+  }
+
+  form {
+    width: 100%;
+    height: auto;
+    position: unset;
+    margin-left: 0%;
+    margin-top: 0%;
+  }
+
+  .address {
+    width: 100%;
+    height: 5%;
+    display: flex;
+    margin-top: 10%;
+  }
+
+  .map {
+    width: 3%;
+    height: 100%;
+    /* background-color: turquoise; */
+  }
+
+  .map img {
+    width: 100%;
+    display: block;
+  }
+
+  .mail {
+    width: 100%;
+    height: 5%;
+    display: flex;
+    margin-top: 3%;
+  }
+
+  .emoji {
+    width: 3.8%;
+    height: 100%;
+  }
+
+  .emoji img {
+    width: 100%;
+    display: block;
+  }
+  col-50 {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 8%;
+    margin-bottom: 3%;
+  }
+  .name,
+  .e-mail {
+    width: 100%;
+    height: auto;
+    margin-right: 5%;
+  }
+
+  input[type="text"],
+  textarea {
+    width: 100%; /* Full width */
+    padding-top: 5%;
+    padding-left: 5%;
+    background-color: #cecfce;
+    border-radius: 6px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    /* resize: vertical ; */
+    font-family: "Hina Mincho", serif;
+    font-size: 1vw;
+  }
+  textarea {
+    width: 100%;
+    height: 300px;
+    margin-right: 5%;
+  }
+  input[type="submit"] {
+    background-color: #cf755a;
+    color: white;
+    padding: 4% 13%;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1vw;
+    margin-top: 2%;
+    font-family: "Hina Mincho", serif;
+  }
+  .bg {
+    display: inline;
+    width: 60%;
+    margin: 0 auto;
+  }
+  .bg img {
+    width: 100%;
+  }
+}
+
+/* フッター */
+.footer-wrapper {
+  max-width: 100%;
+  height: auto;
+  /* height: 270px; */
+  max-height: 80%;
+  margin-top: 10%;
+  position: relative;
+  display: flex;
+}
+
+.footer-l {
+  border-top: solid 1px;
+  color: #6f6f6f;
+  max-width: 100%;
+  width: 20%;
+}
+
+.footer-l a {
+  text-decoration: none;
+  color: black;
+  font-family: "Hina Mincho", serif;
+  writing-mode: vertical-lr;
+  font-size: 1.5vmin;
+  letter-spacing: 1vmin;
+  padding: 10%;
+  padding-left: 80%;
+  padding-top: 20%;
+  white-space: nowrap;
+}
+
+.footer-c {
+  max-width: 100%;
+  width: 60%;
+  height: 100%;
+  background-image: url(../images/top_fbkpng.png);
+  background-size: cover;
+  position: absolute;
+  left: 20%;
+  top: 0%;
+  display: flex;
+  justify-content: center;
+}
+
+.tbtn {
+  position: absolute;
+  left: 48%;
+  top: -5%;
+  width: 8%;
+}
+
+.f-logo {
+  /* text-align: center; */
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  /* position: absolute;
+      top:20%;
+      left:10%; */
+  /* margin-left: 7%; */
+  /* margin-top: 2%; */
+  /* margin-right: 5%; */
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.f-logo h2 {
+  color: #afafaf;
+  letter-spacing: 2.4vmin;
+  font-size: 3vmin;
+}
+
+.f-logo img {
+  width: 15%;
+  /* padding-left: 4%; */
+  /* padding-right: 4%; */
+}
+
+small {
+  position: absolute;
+  top: 86%;
+  font-family: "Hina Mincho", serif;
+  color: #3f3f3f;
+}
+
+.sns {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 1%;
+  top: 4%;
+  gap: 0px;
+}
+
+.sns img {
+  width: 1.5vw;
+  height: auto;
+}
+
+.footer-r {
+  border-top: solid 1px;
+  color: #6f6f6f;
+  max-width: 100%;
+  width: 20%;
+  position: absolute;
+  right: 0%;
+}
+
+.footer-r a {
+  text-decoration: none;
+  font-family: "Hina Mincho", serif;
+  color: black;
+  writing-mode: vertical-lr;
+  font-size: 1.5vmin;
+  letter-spacing: 0.5vmin;
+  padding: 10%;
+  padding-right: 80%;
+  padding-top: 15%;
+  white-space: nowrap;
+}
+
+/* mobile----------------- */
+
+/* footer */
+@media (max-width: 1500px) {
+  .f-logo h2 {
+    font-size: 2.5vmin;
+  }
+
+  .footer-r a {
+    font-size: 1.5vmin;
+  }
+
+  .footer-l a {
+    font-size: 1.5vmin;
+  }
+}
+
+@media (max-width: 750px) {
+  .f-logo h2 {
+    font-size: 2.5vmin;
+    letter-spacing: 1.5vmin;
+  }
+
+  .footer-r a {
+    font-size: 1.5vmin;
+  }
+
+  .footer-l a {
+    font-size: 1.5vmin;
+  }
+
+  small {
+    font-size: 6px;
+  }
+}
+
+/* Loader */
+
+.loader {
+  background: url("../images/about-us_07.png");
+  background-size: cover;
+  height: 120px;
+  width: 100px;
+}
+.loader {
+  position: relative;
+  top: 25%;
+  left: 45%;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load8 2s infinite linear;
+  animation: load8 2s infinite linear;
+}
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+#loadingDiv {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200vh;
+  z-index: 999;
+  background-color: #fff;
+}

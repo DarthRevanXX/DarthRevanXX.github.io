@@ -1,0 +1,765 @@
+@charset "utf-8";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  font-family: "Hina Mincho", serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Hina Mincho", serif;
+}
+
+body {
+  background-color: #f7f4d8;
+}
+
+/* ぼかしから出現 */
+.blur {
+  animation-name: blurAnime;
+  animation-duration: 1.8s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes blurAnime {
+  from {
+    filter: blur(10px);
+    transform: scale(1.02);
+    opacity: 0;
+  }
+
+  to {
+    filter: blur(0);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* スクロールをしたら出現する要素にはじめに透過0を指定　*/
+
+.blurTrigger {
+  opacity: 0;
+}
+
+/* -------------------- */
+
+.wrapper {
+  max-width: 100vw;
+  max-height: 100vh;
+  width: 100%;
+  height: auto;
+}
+
+/* ヘッダー */
+
+#header {
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 35px;
+  padding-bottom: 10px;
+  position: sticky;
+  /*固定する*/
+  position: -webkit-sticky;
+  /*Safari用ベンダープレフィックス*/
+  top: 0;
+  background-color: #f7f4d8;
+
+  /* margin-left: 15%; */
+  /* padding: 5%; */
+}
+
+.h-logo {
+  padding-right: 50px;
+}
+
+.holizon-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.holizon-nav li {
+  max-width: 100%;
+  text-decoration: none;
+  list-style-type: none;
+  font-family: "Hina Mincho", serif;
+  letter-spacing: 0.5vmin;
+  font-size: 1.4vmin;
+  /* padding-right: 10%; */
+  white-space: nowrap;
+  /* align-items: center; */
+}
+
+.holizon-nav a {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: #333;
+}
+
+.holizon-nav a::after {
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 1.3px;
+  background: #cf755a;
+  transform: scale(0, 1);
+  transform-origin: center top;
+  transition: transform 0.3s;
+}
+
+.holizon-nav a:hover::after {
+  transform: scale(1, 1);
+}
+
+.hamburger {
+  visibility: hidden;
+}
+
+.globalMenuSp {
+  display: none;
+}
+
+@media (max-width: 1280px) {
+  .holizon {
+    display: none;
+  }
+
+  .hamburger {
+    visibility: visible;
+  }
+
+  .globalMenuSp {
+    display: block;
+  }
+
+  .h-logo {
+    padding-right: 0;
+    text-align: center;
+  }
+
+  .h-logo img {
+    width: 55%;
+  }
+
+  /* ハンバーガーメニュー */
+
+  /*　ハンバーガーボタン */
+  .hamburger {
+    display: block;
+    position: fixed;
+    z-index: 3;
+    /* right : 32px; */
+    top: 32px;
+    left: 20px;
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .hamburger span {
+    display: block;
+    position: absolute;
+    width: 30px;
+    height: 2px;
+    left: 6px;
+    background: #555;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    transition: 0.5s all;
+  }
+
+  .hamburger span:nth-child(1) {
+    top: 10px;
+  }
+
+  .hamburger span:nth-child(2) {
+    top: 20px;
+  }
+
+  .hamburger span:nth-child(3) {
+    top: 30px;
+  }
+
+  /* ナビ開いてる時のボタン */
+
+  .hamburger.active span:nth-child(1) {
+    top: 16px;
+    left: 6px;
+    width: 24px;
+    background: #555;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    left: 60%;
+    opacity: 0;
+    -webkit-animation: active-btn17-bar02 0.8s forwards;
+    animation: active-hamburger-bar02 0.8s forwards;
+  }
+
+  @-webkit-keyframes active-hamburger-bar02 {
+    100% {
+      height: 0;
+    }
+  }
+
+  @keyframes active-hamburger-bar02 {
+    100% {
+      height: 0;
+    }
+  }
+
+  .hamburger.active span:nth-child(3) {
+    top: 16px;
+    width: 24px;
+    background: #555;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  .hamburger::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    content: "";
+    width: 52px;
+    height: 52px;
+    margin: -30px 0 0 -30px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0);
+    transition: all 0.75s;
+  }
+
+  .hamburger.active::after {
+    border: 2px solid #555;
+  }
+
+  nav.globalMenuSp {
+    position: fixed;
+    z-index: 2;
+    top: 80px;
+    left: 0;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+    visibility: hidden;
+  }
+
+  nav.globalMenuSp ul {
+    /* margin-top: 50px;
+  margin-bottom: 40px; */
+    padding: 0;
+    width: 100%;
+  }
+
+  nav.globalMenuSp ul li {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 25px;
+    margin-left: 10px;
+    padding-bottom: 15px;
+    width: 100%;
+    transition: 0.4s all;
+  }
+
+  nav.globalMenuSp ul li:last-child {
+    padding-bottom: 20px;
+  }
+
+  nav.globalMenuSp ul li:hover {
+    /* background :#ddd; */
+    border-right: solid 1px #fff;
+    width: 70%;
+  }
+
+  nav.globalMenuSp ul li a {
+    display: block;
+    color: #fff;
+    padding: 1em 0;
+    text-decoration: none;
+    letter-spacing: 6px;
+    font-family: "Hina Mincho", serif;
+  }
+
+  /* このクラスを、jQueryで付与・削除する */
+  nav.globalMenuSp.active {
+    opacity: 100;
+    visibility: visible;
+  }
+}
+
+.contents-wrapper {
+  width: 100%;
+  display: flex;
+  margin-top: 5%;
+}
+
+.shopping-btn {
+  width: 12%;
+  height: 100%;
+  margin-top: 3%;
+  padding-left: 3%;
+  position: fixed;
+  z-index: 3;
+}
+
+.shopping-btn img {
+  width: 60%;
+}
+.photo {
+  width: 53%;
+  display: flex;
+}
+.m-photo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.rice {
+  width: 100%;
+  margin-top: 5%;
+  margin-left: 2%;
+  margin-bottom: 10%;
+}
+
+.pig {
+  width: 20%;
+  margin: 0 auto;
+}
+
+.title {
+  width: 13%;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 20%;
+  margin-left: 10%;
+}
+.t-p {
+  width: 90%;
+}
+
+.vege {
+  width: 50%;
+}
+
+article {
+  width: 50%;
+  text-align: center;
+}
+.a {
+  width: 100%;
+}
+.a h1 {
+  width: 100%;
+  letter-spacing: 0.8vw;
+  font-size: 1.3vw;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  margin-top: 5%;
+}
+.a img {
+  width: 65%;
+  margin-top: 1%;
+}
+
+.a-txt {
+  width: 80%;
+  height: 20%;
+  font-size: 12px;
+  letter-spacing: 0.4vw;
+  line-height: 3vw;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  margin-top: 2%;
+  margin-bottom: 6%;
+  margin-left: 10%;
+  margin-right: 10%;
+  text-align: inherit;
+}
+.a-1 {
+  width: 100%;
+  /* position: relative; */
+}
+
+.aa1 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.aa1 ul {
+  width: 60%;
+  list-style-type: none;
+  text-align: center;
+  margin-left: 15%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+.aa1 li {
+  font-family: "Hina Mincho", serif;
+  font-size: 0.8vw;
+  letter-spacing: 0.3vw;
+  line-height: 3vw;
+}
+
+.myoga {
+  width: 15%;
+}
+.myoga img {
+  width: 60%;
+  padding-top: 90%;
+}
+
+.a-1 h2 {
+  width: 60%;
+  margin: 0 auto;
+  font-size: 1.5vw;
+  letter-spacing: 5vw;
+  border-bottom: solid 1px #a6abaf;
+  padding-left: 10%;
+  margin-bottom: 2%;
+}
+.a-2 {
+  width: 80%;
+  margin-top: 2%;
+  margin-left: 10%;
+  margin-bottom: 10%;
+}
+
+.a-2 h2 {
+  width: 60%;
+  margin: 0 auto;
+  font-size: 1.5vw;
+  margin-bottom: 2%;
+  border-bottom: solid 1px #a6abaf;
+  letter-spacing: 1vw;
+}
+
+.a-2 ul {
+  width: 100%;
+  list-style-type: none;
+  padding-top: 3%;
+  padding-bottom: 6%;
+}
+
+.a-2 li {
+  font-family: "Hina Mincho", serif;
+  font-size: 0.8vw;
+  letter-spacing: 0.3vw;
+  line-height: 3vw;
+}
+
+.a-2 img {
+  margin-top: 1.5%;
+}
+
+@media (max-width: 500px) {
+  .contents-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1%;
+  }
+
+  .photo {
+    width: 70%;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-left: 20%;
+  }
+  .m-photo {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+  }
+  .rice {
+    width: 93%;
+    margin-top: 5%;
+    margin-left: 8%;
+    margin-bottom: 0%;
+  }
+
+  .pig {
+    display: none;
+  }
+
+  .title {
+    margin-left: 1%;
+    padding-top: 0%;
+  }
+  article {
+    width: 100%;
+  }
+  .a {
+    height: 100%;
+  }
+  .a-txt {
+    width: 60%;
+    /* height: 50%; */
+    font-size: 10px;
+    letter-spacing: 0.8vw;
+    line-height: 5vw;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    margin: 0 auto;
+  }
+  .a-1 {
+    margin-top: 5%;
+  }
+
+  .a-1 h2 {
+    padding-left: 0%;
+  }
+
+  a-2 img {
+    width: 5%;
+    margin-top: 1.5%;
+  }
+  .aa1 ul {
+    width: 80%;
+    margin: 0 auto;
+    height: auto;
+  }
+  .aa1 li {
+    line-height: 8vw;
+    text-align: center;
+    padding-left: 15%;
+  }
+
+  .a-2 ul {
+    width: 75%;
+    margin: 0 auto;
+    height: auto;
+  }
+  .a-2 li {
+    line-height: 8vw;
+    text-align: center;
+    padding-left: 1%;
+  }
+}
+
+/* フッター */
+.footer-wrapper {
+  max-width: 100%;
+  height: auto;
+  /* height: 270px; */
+  max-height: 80%;
+  margin-top: 10%;
+  position: relative;
+  display: flex;
+}
+
+.footer-l {
+  border-top: solid 1px;
+  color: #6f6f6f;
+  max-width: 100%;
+  width: 20%;
+}
+
+.footer-l a {
+  text-decoration: none;
+  color: black;
+  font-family: "Hina Mincho", serif;
+  writing-mode: vertical-lr;
+  font-size: 1.5vmin;
+  letter-spacing: 1vmin;
+  padding: 10%;
+  padding-left: 80%;
+  padding-top: 20%;
+  white-space: nowrap;
+}
+
+.footer-c {
+  max-width: 100%;
+  width: 60%;
+  height: 100%;
+  background-image: url(../images/top_fbkpng.png);
+  background-size: cover;
+  position: absolute;
+  left: 20%;
+  top: 0%;
+  display: flex;
+  justify-content: center;
+}
+
+.tbtn {
+  position: absolute;
+  left: 48%;
+  top: -5%;
+  width: 8%;
+}
+
+.f-logo {
+  /* text-align: center; */
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  /* position: absolute;
+        top:20%;
+        left:10%; */
+  /* margin-left: 7%; */
+  /* margin-top: 2%; */
+  /* margin-right: 5%; */
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.f-logo h2 {
+  color: #afafaf;
+  letter-spacing: 2.4vmin;
+  font-size: 3vmin;
+}
+
+.f-logo img {
+  width: 15%;
+  /* padding-left: 4%; */
+  /* padding-right: 4%; */
+}
+
+small {
+  position: absolute;
+  top: 86%;
+  font-family: "Hina Mincho", serif;
+  color: #3f3f3f;
+}
+
+.sns {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 1%;
+  top: 4%;
+  gap: 0px;
+}
+
+.sns img {
+  width: 1.5vw;
+  height: auto;
+}
+
+.footer-r {
+  border-top: solid 1px;
+  color: #6f6f6f;
+  max-width: 100%;
+  width: 20%;
+  position: absolute;
+  right: 0%;
+}
+
+.footer-r a {
+  text-decoration: none;
+  font-family: "Hina Mincho", serif;
+  color: black;
+  writing-mode: vertical-lr;
+  font-size: 1.5vmin;
+  letter-spacing: 0.5vmin;
+  padding: 10%;
+  padding-right: 80%;
+  padding-top: 15%;
+  white-space: nowrap;
+}
+
+/* mobile----------------- */
+
+/* footer */
+@media (max-width: 1500px) {
+  .f-logo h2 {
+    font-size: 2.5vmin;
+  }
+
+  .footer-r a {
+    font-size: 1.5vmin;
+  }
+
+  .footer-l a {
+    font-size: 1.5vmin;
+  }
+}
+
+@media (max-width: 750px) {
+  .f-logo h2 {
+    font-size: 2.5vmin;
+    letter-spacing: 1.5vmin;
+  }
+
+  .footer-r a {
+    font-size: 1.5vmin;
+  }
+
+  .footer-l a {
+    font-size: 1.5vmin;
+  }
+
+  small {
+    font-size: 6px;
+  }
+}
+
+/* Loader */
+
+.loader {
+  background: url("../images/about-us_07.png");
+  background-size: cover;
+  height: 120px;
+  width: 100px;
+}
+.loader {
+  position: relative;
+  top: 25%;
+  left: 45%;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load8 2s infinite linear;
+  animation: load8 2s infinite linear;
+}
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+#loadingDiv {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200vh;
+  z-index: 999;
+  background-color: #f7f4d8;
+}
